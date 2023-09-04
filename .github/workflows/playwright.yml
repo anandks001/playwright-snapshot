@@ -18,6 +18,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
+      id: run-e2e
       run: npx playwright test
     - uses: actions/upload-artifact@v3
       if: always()
@@ -25,3 +26,8 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      if: steps.run-e2e.outcome == 'success'
+      with:
+        commit_message: "E2E. Update snapshots"
+        file_pattern: "**/projects/utv/e2e/playwright/snapshots/integration/**"

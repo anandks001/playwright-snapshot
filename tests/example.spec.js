@@ -8,6 +8,13 @@ test('has title', async ({ page }) => {
   await expect(page).toHaveTitle(/Playwright/);
 });
 
+test('has snapshot', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  await expect(page).toHaveScreenshot();
+});
+
+
 test('get started link', async ({ page }) => {
   await page.goto('https://playwright.dev/');
 
