@@ -11,7 +11,7 @@ test('has title', async ({ page }) => {
 test('has snapshot', async ({ page }) => {
   await page.goto('https://playwright.dev/');
 
-  await expect(page).toHaveScreenshot();
+  await expect(page).toHaveScreenshot('home.png');
 });
 
 
