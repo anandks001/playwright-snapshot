@@ -30,4 +30,4 @@ jobs:
       if: steps.run-e2e.outcome == 'success'
       with:
         commit_message: "E2E. Update snapshots"
-        file_pattern: "**/projects/utv/e2e/playwright/snapshots/integration/**"
+        file_pattern: "/tests/example.spec.js-snapshots/**"
