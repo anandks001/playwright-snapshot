@@ -80,5 +80,3 @@ jobs:
       if: always()
       with:
         commit_message: "E2E. Update snapshots"
-        file_pattern: "${{inputs.project}}/snapshots/**"
-        disable_globbing: true
