@@ -11,14 +11,49 @@ on:
           - test
           - tv-app
           - utv
+      spec:
+        type: string
+        description: Pattern to match to files to test
+        required: true
+        default: '**'
+      tenant:
+        type: string
+        description: Tenant to test
+        required: true
+        default: demo
+      client:
+        type: choice
+        description: Client
+        required: true
+        default: web
+        options:
+          - android
+          - androidtv
+          - fireos
+          - firetv
+          - panasonic
+          - tizen
+          - web
+          - webos
+      os:
+        type: choice
+        description: OS
+        required: true
+        default: ubuntu-latest
+        options:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
 
 env:
   PROJECT: ${{github.event.inputs.project}}
+  TENANT: ${{github.event.inputs.tenant}}
+  CLIENT: ${{github.event.inputs.client}}
 
 jobs:
   test:
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    runs-on: ${{inputs.os}}
 
     permissions:
       contents: write
@@ -34,7 +69,7 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       id: run-e2e
-      run: npx playwright test --update-snapshots
+      run: npx playwright test ${{inputs.spec}} --update-snapshots
     - uses: actions/upload-artifact@v3
       if: always()
       with:
@@ -45,3 +80,5 @@ jobs:
       if: always()
       with:
         commit_message: "E2E. Update snapshots"
+        file_pattern: "${{inputs.project}}/snapshots/**"
+        disable_globbing: true
