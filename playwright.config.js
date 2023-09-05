@@ -12,6 +12,7 @@ const { defineConfig, devices } = require('@playwright/test');
  */
 module.exports = defineConfig({
   snapshotPathTemplate: 'tests/snapshots/{arg}{ext}',
+  updateSnapshots: 'all',
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
