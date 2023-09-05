@@ -14,8 +14,6 @@ on:
 
 env:
   PROJECT: ${{github.event.inputs.project}}
-  TENANT: ${{github.event.inputs.tenant}}
-  CLIENT: ${{github.event.inputs.client}}
 
 jobs:
   test:
@@ -47,4 +45,3 @@ jobs:
       if: always()
       with:
         commit_message: "E2E. Update snapshots"
-        file_pattern: "${{inputs.project}}/snapshots/**"
