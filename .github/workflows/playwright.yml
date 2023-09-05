@@ -14,8 +14,6 @@ on:
       spec:
         type: string
         description: Pattern to match to files to test
-        required: true
-        default: '**'
       tenant:
         type: string
         description: Tenant to test
@@ -69,7 +67,7 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       id: run-e2e
-      run: npx playwright test ${{inputs.spec}} --update-snapshots --updateSnapshots=all
+      run: npx playwright test ${{inputs.spec}} --update-snapshots
     - uses: actions/upload-artifact@v3
       if: always()
       with:
